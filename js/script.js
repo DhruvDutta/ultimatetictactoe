@@ -235,7 +235,7 @@ function reset(){
     var cells = document.getElementsByClassName("cell");
     for (var i = 0; i < cells.length; i++) {
         let index = cells.item(i).id
-        if(index>9){
+        if(parseInt(index)>9){
             cells.item(i).innerText =''
         }
         
