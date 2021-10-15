@@ -84,6 +84,10 @@ function join_room(){
 }
 function Initiate_game(){
     console.log('init...')
+    document.getElementById('room_code_copy').classList.remove('d-none')
+    document.getElementById('copy_btn').classList.remove('d-none')
+
+    document.getElementById('room_code_copy').innerHTML = curr_ref +" "+document.getElementById('room_code_copy').innerHTML
     var cells = document.getElementsByClassName("cell");
     for (var i = 0; i < cells.length; i++) {
         let index = cells.item(i).id
@@ -260,3 +264,7 @@ function reset(){
     document.getElementById('wintext').innerText = ''
 }
 document.getElementById('reset').addEventListener('click',reset);
+document.getElementById('copy_btn').addEventListener('click',()=>{
+    navigator.clipboard.writeText(curr_ref);
+    document.getElementById('alert').innerHTML=alert_html;
+})
