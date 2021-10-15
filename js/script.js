@@ -101,11 +101,10 @@ function Initiate_game(){
                 deck[data.val()].push(parseInt(data.key))
                     if(local['X'].includes(parseInt(data.key)%10) || local['O'].includes(parseInt(data.key)%10)){
                         for(let i=1;i<10;i++){
-                            if(i==parseInt(data.key)%10 ){
+                            if(i==parseInt(data.key)%10){
                                 document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
-                                continue
                             }
-                            if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                            else if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
                                 console.log('blur except:',i)
                                 document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
                             }
@@ -238,7 +237,6 @@ function reset(){
         if(parseInt(index)>9){
             cells.item(i).innerText =''
         }
-        
     }
     firebase.update(ref(db,`room/`),{
         [curr_ref]:null,
