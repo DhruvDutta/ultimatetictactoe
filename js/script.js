@@ -94,38 +94,37 @@ function Initiate_game(){
     document.getElementById('turn').classList.remove('d-none')
     const commentsRef = ref(db, 'room/' + curr_ref);
     firebase.onChildAdded(commentsRef, (data) => {
-        win_check_fr()
-        setTimeout(()=>{
-            if(isNumeric(data.key)){
-                if(parseInt(data.key)>0 && parseInt(data.key)<=100){
-                    document.getElementById(data.key).innerText = data.val();
-                    deck[data.val()].push(parseInt(data.key))
-                    if(local['X'].includes(parseInt(data.key)%10) || local['O'].includes(parseInt(data.key)%10)){
-                        for(let i=1;i<10;i++){
-                            if(i==parseInt(data.key)%10){
-                                document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
-                                console.log('blur except:',i)
-                            }
-                            else if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
-                                document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
-                            }
+        
+        if(isNumeric(data.key)){
+            if(parseInt(data.key)>0 && parseInt(data.key)<=100){
+                console.log('if chla')
+                document.getElementById(data.key).innerText = data.val();
+                deck[data.val()].push(parseInt(data.key))
+                win_check_fr()
+                if(local['X'].includes(parseInt(data.key)%10) || local['O'].includes(parseInt(data.key)%10)){
+                    for(let i=1;i<10;i++){
+                        if(i==parseInt(data.key)%10){
+                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                            console.log('blur except:',i)
                         }
-                    }else{
-                        for(let i=1;i<10;i++){
-                            if(i==parseInt(data.key)%10 ){
-                                    console.log('blur except:',i)
-                                    document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
-                                    continue
-                                }
-                                if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
-                                    document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
-                                }
+                        else if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                        }
+                    }
+                }else{
+                    for(let i=1;i<10;i++){
+                        if(i==parseInt(data.key)%10 ){
+                            console.log('blur except:',i)
+                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                            continue
+                        }
+                        if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
                         }
                     }
                 }
             }
-            win_check_fr()
-        },500)
+        }
         if(data.key == 'o_user' && user_mark!='O'){
             oppo_name = data.val()
             if(oppo_name==''){
@@ -191,6 +190,7 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 function win_check_fr(){
+    console.log('wincheck chla')
     let win_condition=[[1,2,3],[4,5,6],[7,8,9],[1,5,9],[3,5,7],[1,4,7],[2,5,8],[3,6,9]]
     console.log("X:",local["X"])
     console.log("O:",local["O"])
