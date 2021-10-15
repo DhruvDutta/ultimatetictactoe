@@ -27,7 +27,7 @@ let curr_ref;
 let user_mark;
 let oppo_mark;
 let oppo_name;
-let user_name;
+let user_name ='You';
 let deck={"X":[],"O":[],};
 let local={"X":[],"O":[],};
 document.getElementById('createbtn').addEventListener('click',create_room);
@@ -214,17 +214,17 @@ function win_check_fr(){
         if(win_condition[i].every(val=> local["X"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
             if(user_mark=='X'){
-                document.getElementById('wintext').innerText = `${user_name} Wins!`
+                document.getElementById('wintext').innerText = `${user_name} Won!`
             }else{
-                document.getElementById('wintext').innerText = `${oppo_name} Wins!`
+                document.getElementById('wintext').innerText = `${oppo_name} Won!`
             }
             return
         }else if(win_condition[i].every(val=> local["O"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
             if(user_mark=='O'){
-                document.getElementById('wintext').innerText = `${user_name} Wins!`
+                document.getElementById('wintext').innerText = `${user_name} Won!`
             }else{
-                document.getElementById('wintext').innerText = `${oppo_name} Wins!`
+                document.getElementById('wintext').innerText = `${oppo_name} Won!`
             }
             return
         }
@@ -238,6 +238,11 @@ function reset(){
         if(parseInt(index)>9){
             cells.item(i).innerText =''
         }
+    }
+    var cover = document.getElementsByClassName("cover");
+    for (var i = 0; i < cover.length; i++) {
+        cover.item(i).innerText=''
+        cover.item(i).classList.add('d-none')
     }
     firebase.update(ref(db,`room/`),{
         [curr_ref]:null,
