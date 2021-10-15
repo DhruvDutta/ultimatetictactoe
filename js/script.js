@@ -213,11 +213,19 @@ function win_check_fr(){
         }
         if(win_condition[i].every(val=> local["X"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
-            document.getElementById('wintext').innerText = `${username} Wins!`
+            if(user_mark=='X'){
+                document.getElementById('wintext').innerText = `${user_name} Wins!`
+            }else{
+                document.getElementById('wintext').innerText = `${oppo_name} Wins!`
+            }
             return
         }else if(win_condition[i].every(val=> local["O"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
-            document.getElementById('wintext').innerText = `${oppo_name} Wins!`
+            if(user_mark=='O'){
+                document.getElementById('wintext').innerText = `${user_name} Wins!`
+            }else{
+                document.getElementById('wintext').innerText = `${oppo_name} Wins!`
+            }
             return
         }
     }
