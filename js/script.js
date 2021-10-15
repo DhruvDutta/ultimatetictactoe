@@ -27,12 +27,14 @@ let curr_ref;
 let user_mark;
 let oppo_mark;
 let oppo_name;
+let user_name;
 let deck={"X":[],"O":[],};
 let local={"X":[],"O":[],};
 document.getElementById('createbtn').addEventListener('click',create_room);
 document.getElementById('joinbtn').addEventListener('click',join_room);
 function create_room(){
     let username = document.getElementById('username').value
+    user_name = username;
     const roomListRef = ref(db, 'room/');
     const newRoomRef = push(roomListRef);
     curr_ref = newRoomRef.key
@@ -92,6 +94,7 @@ function Initiate_game(){
     document.getElementById('turn').classList.remove('d-none')
     const commentsRef = ref(db, 'room/' + curr_ref);
     firebase.onChildAdded(commentsRef, (data) => {
+
         if(isNumeric(data.key)){
             if(parseInt(data.key)>0 && parseInt(data.key)<=100){
                 document.getElementById(data.key).innerText = data.val();
@@ -120,7 +123,6 @@ function Initiate_game(){
                         }
                     }
                 
-                win_check_fr()
             }
         }
         if(data.key == 'o_user' && user_mark!='O'){
@@ -138,6 +140,7 @@ function Initiate_game(){
             }
             document.getElementById('oppoturn').innerText = `${oppo_name}`
         }
+        win_check_fr()
     });
     
     window.onbeforeunload = (e)=>{
@@ -210,11 +213,11 @@ function win_check_fr(){
         }
         if(win_condition[i].every(val=> local["X"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
-            document.getElementById('wintext').innerText = 'X Wins!'
+            document.getElementById('wintext').innerText = `${username} Wins!`
             return
         }else if(win_condition[i].every(val=> local["O"].includes(val))){
             document.getElementById('winbox').classList.remove('d-none');
-            document.getElementById('wintext').innerText = 'O Wins!'
+            document.getElementById('wintext').innerText = `${oppo_name} Wins!`
             return
         }
     }
@@ -224,7 +227,10 @@ function reset(){
     var cells = document.getElementsByClassName("cell");
     for (var i = 0; i < cells.length; i++) {
         let index = cells.item(i).id
-        cells.item(i).innerText =''
+        if(index>9){
+            cells.item(i).innerText =''
+        }
+        
     }
     firebase.update(ref(db,`room/`),{
         [curr_ref]:null,
@@ -234,6 +240,7 @@ function reset(){
         turn:'O',
     })
     deck={"X":[],"O":[],};
+    local = {"X":[],"O":[],};
     document.getElementById('winbox').classList.add('d-none');
     document.getElementById('wintext').innerText = ''
 }
