@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatThePotato</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="bg-dark text-light">
+    
+    <div class="container">
+        <div class="row text-center">
+            <div class="h4">Ultimate TicTacToe</div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1 col-md-6 offset-md-3">
+                <div id="alert"></div>
+            </div>
+        </div>
+        <div class="row mb-3 d-none" id="turn">
+            <div class="col-12 text-center">
+                Turn
+            </div>
+            <div class="col-8 offset-2 col-md-4 offset-md-4">
+                <div class="row text-center">
+                    <div class="col-6 btn text-light border-bottom border-5 fw-bold" id="yourturn">Your</div>
+                    <div class="col-6 btn text-light" id="oppoturn">Opponent</div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12 col-md-6 offset-md-3 col-sm-10 offset-sm-1 d-flex justify-content-center align-items-center gamecol px-md-4">
+                <div class="gamebox">
+                    <div id="1" class="cell" style='--x:1;--y:1;'>
+                        <div id="11" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="12" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="13" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="14" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="15" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="16" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="17" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="18" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="19" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover1 d-none"></div>
+                    </div>
+                    <div id="2" class="cell" style='--x:1;--y:2;'>
+                        <div id="21" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="22" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="23" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="24" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="25" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="26" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="27" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="28" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="29" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover2 d-none"></div>
+                    </div>
+                    <div id="3" class="cell" style='--x:1;--y:3;'>
+                        <div id="31" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="32" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="33" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="34" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="35" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="36" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="37" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="38" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="39" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover3 d-none"></div>
+                    </div>
+                    <div id="4" class="cell" style='--x:2;--y:1;'>
+                        <div id="41" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="42" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="43" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="44" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="45" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="46" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="47" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="48" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="49" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover4 d-none"></div>
+                    </div>
+                    <div id="5" class="cell" style='--x:2;--y:2;'>
+                        <div id="51" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="52" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="53" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="54" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="55" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="56" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="57" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="58" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="59" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover5 d-none"></div>
+                    </div>
+                    <div id="6" class="cell" style='--x:2;--y:3;'>
+                        <div id="61" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="62" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="63" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="64" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="65" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="66" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="67" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="68" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="69" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover6 d-none"></div>
+                    </div>
+                    <div id="7" class="cell" style='--x:3;--y:1;'>
+                        <div id="71" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="72" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="73" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="74" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="75" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="76" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="77" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="78" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="79" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover7 d-none"></div>
+                    </div>
+                    <div id="8" class="cell" style='--x:3;--y:2;'>
+                        <div id="81" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="82" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="83" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="84" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="85" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="86" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="87" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="88" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="89" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover8 d-none"></div>
+                    </div>
+                    <div id="9" class="cell" style='--x:3;--y:3;'>
+                        <div id="91" class="cell" style='--x:1;--y:1;'></div>
+                        <div id="92" class="cell" style='--x:1;--y:2;'></div>
+                        <div id="93" class="cell" style='--x:1;--y:3;'></div>
+                        <div id="94" class="cell" style='--x:2;--y:1;'></div>
+                        <div id="95" class="cell" style='--x:2;--y:2;'></div>
+                        <div id="96" class="cell" style='--x:2;--y:3;'></div>
+                        <div id="97" class="cell" style='--x:3;--y:1;'></div>
+                        <div id="98" class="cell" style='--x:3;--y:2;'></div>
+                        <div id="99" class="cell" style='--x:3;--y:3;'></div>
+                        <div class="cover cover9 d-none"></div>
+                    </div>
+                </div>
+                <div id="winbox" class="d-flex justify-content-center align-items-center flex-column rounded d-none">
+                    <div class="h1 p-5 border border-light rounded" id="wintext">Draw</div>
+                    <div class="btn btn-outline-light" id="reset">Play Again!</div>
+                </div>
+                <div class="room" id="roombox">
+                    <div class="container col-12">
+                        <div class="row mb-1">
+                            <input type="text" class="input rounded col-6 offset-3 py-2 text-center" placeholder="Name" id="username">
+                        </div>
+                        <div class="row">
+                            <input type="text" class="input rounded col-6 offset-3 py-2 text-center" placeholder="Room Code" id="room_code">
+                        </div>
+                        <div class="row px-5 py-3">
+                            <div class="btn btn-info col mx-2" id="createbtn">Create</div>
+                            <div class="btn btn-success col mx-2" id="joinbtn">Join</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="./js/script.js" type="module"></script>
+</body>
+</html>

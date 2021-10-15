@@ -1,0 +1,81 @@
+.gamecol{
+    position: relative;
+}
+.gamebox{
+    position: relative;
+    width: 100%;
+	margin: 0 auto;
+    background-color: #2c3e50;
+    color: #fff;
+    border: 6px solid #2c3e50;
+    border-radius: 10px;
+}
+.gamebox::after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+.cell{
+    border: 3px solid #2c3e50;
+    background-color: #34495e;
+    border-radius: 2px;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    position: absolute;
+    height: 33.33%;
+    width: 33.34%;
+    left: calc(33.333%*var(--y));
+    top: calc(33.333%*var(--x));
+    transform: translate(-100%,-100%);
+
+}
+.gamebox>.cell{
+    background-color: #2c3e50;
+}
+.room{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    backdrop-filter: blur(2px);
+}
+.input{
+    outline: none;
+    border: none;
+}
+#winbox{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+}
+#wintext{
+    background-color: #242424;
+    box-shadow: 0px 0px 10px #222;
+}
+#winbox>.btn{
+    box-shadow: 0px 0px 10px #222;
+}
+.cover{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(1px);
+    background: rgba(0,0,0,0.6);
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#turn>div>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
