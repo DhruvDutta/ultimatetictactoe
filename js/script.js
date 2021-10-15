@@ -51,8 +51,8 @@ function create_room(){
 function join_room(){
     let roomcode = document.getElementById('room_code').value
     let username = document.getElementById('username').value
-    document.getElementById('yourturn').classList.remove('text-dark','bg-light')
-    document.getElementById('oppoturn').classList.add('text-dark','bg-light')
+    document.getElementById('yourturn').classList.remove('border-5','border-bottom','fw-bold')
+    document.getElementById('oppoturn').classList.add('border-5','border-bottom','fw-bold')
     if(roomcode==''){
         document.getElementById('alert').innerHTML=error_html;
         return
@@ -96,27 +96,30 @@ function Initiate_game(){
             if(parseInt(data.key)>0 && parseInt(data.key)<=100){
                 document.getElementById(data.key).innerText = data.val();
                 deck[data.val()].push(parseInt(data.key))
-                for(let i=1;i<10;i++){
-                    if(local['X'].includes(parseInt(data.key)) || local['Y'].includes(parseInt(data.key))){
-                        if(i==parseInt(data.key)%10 ){
-                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
-                            continue
-                        }
-                        if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
-                            console.log('blur except:',i)
-                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                    if(local['X'].includes(parseInt(data.key)%10) || local['O'].includes(parseInt(data.key)%10)){
+                        for(let i=1;i<10;i++){
+                            if(i==parseInt(data.key)%10 ){
+                                document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                                continue
+                            }
+                            if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                                console.log('blur except:',i)
+                                document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                            }
                         }
                     }else{
-                        if(i==parseInt(data.key)%10 ){
-                            console.log('blur except:',i)
-                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
-                            continue
-                        }
-                        if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
-                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                        for(let i=1;i<10;i++){
+                            if(i==parseInt(data.key)%10 ){
+                                    console.log('blur except:',i)
+                                    document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                                    continue
+                                }
+                                if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                                    document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                                }
                         }
                     }
-                }
+                
                 win_check_fr()
             }
         }
@@ -186,18 +189,23 @@ function isNumeric(n) {
 }
 function win_check_fr(){
     let win_condition=[[1,2,3],[4,5,6],[7,8,9],[1,5,9],[3,5,7],[1,4,7],[2,5,8],[3,6,9]]
-    console.log("X:",deck["X"])
-    console.log("O:",deck["O"])
+    console.log("X:",local["X"])
+    console.log("O:",local["O"])
     for(let i=0;i<win_condition.length;i++){
         for(let j=1;j<10;j++){
             if(win_condition[i].every(val=> deck["X"].includes((j*10)+val))){
                 document.getElementsByClassName(`cover${j}`)[0].classList.remove('d-none');
                 document.getElementsByClassName(`cover${j}`)[0].innerText = 'X'
-                local['X'].push(j)
+                if(!local['X'].includes(j)){
+                    local['X'].push(j)
+                }
+                
             }else if(win_condition[i].every(val=> deck["O"].includes((j*10)+val))){
                 document.getElementsByClassName(`cover${j}`)[0].classList.remove('d-none');
                 document.getElementsByClassName(`cover${j}`)[0].innerText = 'O'
-                local['O'].push(j)
+                if(!local['O'].includes(j)){
+                    local['O'].push(j)
+                }
             }
         }
         if(win_condition[i].every(val=> local["X"].includes(val))){
