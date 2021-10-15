@@ -97,13 +97,24 @@ function Initiate_game(){
                 document.getElementById(data.key).innerText = data.val();
                 deck[data.val()].push(parseInt(data.key))
                 for(let i=1;i<10;i++){
-                    if(i==parseInt(data.key)%10){
-                        console.log('blur except:',i)
-                        document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
-                        continue
-                    }
-                    if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
-                        document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                    if(local['X'].includes(parseInt(data.key)) || local['Y'].includes(parseInt(data.key))){
+                        if(i==parseInt(data.key)%10 ){
+                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                            continue
+                        }
+                        if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                            console.log('blur except:',i)
+                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                        }
+                    }else{
+                        if(i==parseInt(data.key)%10 ){
+                            console.log('blur except:',i)
+                            document.getElementsByClassName(`cover${i}`)[0].classList.add('d-none')
+                            continue
+                        }
+                        if(document.getElementsByClassName(`cover${i}`)[0].innerText ==''){
+                            document.getElementsByClassName(`cover${i}`)[0].classList.remove('d-none')
+                        }
                     }
                 }
                 win_check_fr()
