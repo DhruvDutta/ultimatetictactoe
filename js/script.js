@@ -124,7 +124,8 @@ function Initiate_game(){
                     }
                 }
             }
-        },1500)
+            win_check_fr()
+        },500)
         if(data.key == 'o_user' && user_mark!='O'){
             oppo_name = data.val()
             if(oppo_name==''){
