@@ -143,7 +143,10 @@ function Initiate_game(){
     });
     
     window.onbeforeunload = (e)=>{
-        get(child(ref(db),`room/${curr_ref}/`)).then((snapshot)=>{
+        firebase.update(ref(db,`room/`),{
+            [curr_ref]:null,
+        })
+        /*get(child(ref(db),`room/${curr_ref}/`)).then((snapshot)=>{  
             if(!snapshot.val().allow){
                 firebase.update(ref(db,`room/${curr_ref}`),{
                     allow:true,
@@ -153,7 +156,7 @@ function Initiate_game(){
                     [curr_ref]:null,
                 })
             }
-        })
+        })*/
     }
     firebase.onChildChanged(commentsRef,(data)=>{
         if(data.key =='allow' && data.val()==true){
